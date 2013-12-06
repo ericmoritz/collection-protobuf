@@ -6,7 +6,9 @@ package collection;
 ///-------------------------------------------------------------------
 /// A Link message for Collection.links & Item.links
 ///
-/// To get all hyper on.
+/// To get all hyper on. 
+/// List of official link relations: 
+/// http://www.iana.org/assignments/link-relations/link-relations.xhtml
 ///-------------------------------------------------------------------
 message Link {
   optional string rel = 1;
