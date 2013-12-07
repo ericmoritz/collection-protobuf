@@ -18,7 +18,6 @@ message Error {
   optional string code = 2;
   optional string message = 3;
 }
-
 ///-------------------------------------------------------------------
 /// A Link message for Collection.links & Item.links
 ///
@@ -33,7 +32,6 @@ message Link {
   optional string render = 4 [default="link"];
   optional string prompt = 5;
 }
-
 ///-------------------------------------------------------------------
 /// A Query message for describing how to make queries
 ///
@@ -47,7 +45,6 @@ message Query {
   optional string prompt = 4;
   repeated DataField data = 5;
 }
-
 ///-------------------------------------------------------------------
 /// The DataField message is used by the Query message to describe a
 /// query template
@@ -58,7 +55,6 @@ message DataField {
   optional string value = 2;
   optional string prompt = 3;
 }
-
 
 
 
@@ -96,7 +92,7 @@ such as JSON.
 While `collection+json` uses an anonymous objects for `data` fields that are
 shaped like:
 
-```json
+```Con
 {"prompt" : STRING, "name" : STRING, "value" : VALUE}
 ```
 
@@ -189,7 +185,7 @@ described below.
 
 An Item message is shaped like this:
 
-```javascript
+```C
 
 message Item {
   optional string href;
@@ -221,16 +217,13 @@ processing the request.
 
 -->
 
-```javascript
-
+```C
 
 message Error {
   optional string title = 1;
   optional string code = 2;
   optional string message = 3;
 }
-
-
 
 
 ```
@@ -258,8 +251,7 @@ The render field MUST be "link" or "image".
 
 -->
 
-```javascript
-
+```C
 
 message Link {
   required string rel = 1;
@@ -268,7 +260,6 @@ message Link {
   optional string render = 4 [default="link"];
   optional string prompt = 5;
 }
-
 
 
 ```
@@ -296,8 +287,7 @@ The name/value pairs of the `data` messages can be combined with the
 
 -->
 
-```javascript
-
+```C
 
 message Query {
   required string href = 1;
@@ -306,8 +296,6 @@ message Query {
   optional string prompt = 4;
   repeated DataField data = 5;
 }
-
-
 
 
 ```
@@ -328,16 +316,13 @@ The DataField message is used by the Query message to describe a query template
 
 -->
 
-```javascript
-
+```C
 
 message DataField {
   required string name = 1;
   optional string value = 2;
   optional string prompt = 3;
 }
-
-
 
 
 ```

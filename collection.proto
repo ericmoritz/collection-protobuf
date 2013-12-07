@@ -15,7 +15,6 @@ message Error {
   optional string code = 2;
   optional string message = 3;
 }
-
 ///-------------------------------------------------------------------
 /// A Link message for Collection.links & Item.links
 ///
@@ -30,7 +29,6 @@ message Link {
   optional string render = 4 [default="link"];
   optional string prompt = 5;
 }
-
 ///-------------------------------------------------------------------
 /// A Query message for describing how to make queries
 ///
@@ -44,7 +42,6 @@ message Query {
   optional string prompt = 4;
   repeated DataField data = 5;
 }
-
 ///-------------------------------------------------------------------
 /// The DataField message is used by the Query message to describe a
 /// query template
@@ -55,4 +52,3 @@ message DataField {
   optional string value = 2;
   optional string prompt = 3;
 }
-
