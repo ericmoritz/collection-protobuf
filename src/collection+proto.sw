@@ -1,6 +1,9 @@
+% -*- markdown -*-
+@doc collection+proto [out=README.md]
+
 <!--
 
-~~~~~~~~~~~~~~~~~
+@code collection.proto [out=collection.proto]
 package collection;
 ///===================================================================
 /// Collection+Protobuf messages
@@ -9,8 +12,7 @@ package collection;
 // Documentation can be found at
 // <https://github.com/ericmoritz/collection-protobuf/>
 
-~~~~~~~~~~~~~~~~~
-
+@=
 
 -->
 
@@ -159,24 +161,23 @@ The error message is used to express that an error that occured
 processing the request.
 
 <!-- 
-~~~~~~~~~~~~~~~~~
+@code collection.proto
+
 ///-------------------------------------------------------------------
 /// An Error message used to convey the latest error condition
 /// produced by a fault
 ///-------------------------------------------------------------------
-~~~~~~~~~~~~~~~~~
-
+@=
 -->
 ```c
-~~~~~~~~~~~~~~~~~
+@code collection.proto
 message Error {
   optional string title = 1;
   optional string code = 2;
   optional string message = 3;
 }
 
-~~~~~~~~~~~~~~~~~
-
+@=
 
 ```
 
@@ -191,7 +192,9 @@ http://amundsen.com/media-types/linkrelations/
 The render field MUST be "link" or "image".
 
 <!--
-~~~~~~~~~~~~~~~~~
+@code collection.proto
+
+
 ///-------------------------------------------------------------------
 /// A Link message for Collection.links & Item.links
 ///
@@ -199,12 +202,11 @@ The render field MUST be "link" or "image".
 /// List of official link relations:
 /// http://www.iana.org/assignments/link-relations/link-relations.xhtml
 ///-------------------------------------------------------------------
-~~~~~~~~~~~~~~~~~
-
+@=
 -->
 ```c
 
-~~~~~~~~~~~~~~~~~
+@code collection.proto
 message Link {
   required string rel = 1;
   required string href = 2;
@@ -213,8 +215,7 @@ message Link {
   optional string prompt = 5;
 }
 
-~~~~~~~~~~~~~~~~~
-
+@=
 ```
 
 > NOTE: It is up for debate if we should use an enum for the render
@@ -228,20 +229,22 @@ The name/value pairs of the `data` messages can be combined with the
 `href` field to make GET requests.
 
 <!--
-~~~~~~~~~~~~~~~~~
+@code collection.proto
+
+
 ///-------------------------------------------------------------------
 /// A Query message for describing how to make queries
 ///
 /// The name/value pairs of the `data` messages can be combined with the
 /// `href` field to make GET requests.
 ///-------------------------------------------------------------------
-~~~~~~~~~~~~~~~~~
-
+@=
 
 -->
 
 ```c
-~~~~~~~~~~~~~~~~~
+@code collection.proto
+
 message Query {
   required string href = 1;
   required string rel = 2;
@@ -250,8 +253,7 @@ message Query {
   repeated DataField data = 5;
 }
 
-~~~~~~~~~~~~~~~~~
-
+@=
 
 ```
 
@@ -260,28 +262,28 @@ message Query {
 The DataField message is used by the Query message to describe a query template
 
 <!--
-~~~~~~~~~~~~~~~~~
+@code collection.proto
+
 ///-------------------------------------------------------------------
 /// The DataField message is used by the Query message to describe a
 /// query template
 ///-------------------------------------------------------------------
 
-~~~~~~~~~~~~~~~~~
-
+@=
 
 -->
 
 ```c
 
-~~~~~~~~~~~~~~~~~
+@code collection.proto
+
 message DataField {
   required string name = 1;
   optional string value = 2;
   optional string prompt = 3;
 }
 
-~~~~~~~~~~~~~~~~~
-
+@=
 
 ```
 
