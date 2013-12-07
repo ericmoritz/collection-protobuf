@@ -346,6 +346,8 @@ To make .proto file creation easier there is a script called
 
 ```sh
 $ ./bin/new_collection.sh Car
+```
+```protobuf
 import "collection.proto";
 
 message CarResource {
