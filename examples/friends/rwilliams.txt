@@ -1,0 +1,44 @@
+collection {
+  version: "1.0"
+  href: "http://example.org/friends/"
+  links {
+    rel: "feed"
+    href: "http://example.org/friends/rss"
+    prompt: ""
+  }
+  items {
+    href: "http://example.org/friends/rwilliams"
+    pb {
+      full_name: "R. Williams"
+      email: "rwilliams@example.org"
+    }
+    links {
+      rel: "blog"
+      href: "http://examples.org/blogs/rwilliams"
+      prompt: "Blog"
+    }
+    links {
+      rel: "avatar"
+      href: "http://examples.org/images/rwilliams"
+      prompt: "Avatar"
+    }
+  }
+  queries {
+    href: "http://example.org"
+    rel: "search"
+    prompt: "Enter search string"
+    data {
+      name: "search"
+      value: ""
+      prompt: ""
+    }
+  }
+  template {
+    pb {
+      full_name: "R. Williams"
+      email: "rwilliams@example.org"
+      blog: "http://examples.org/blogs/rwilliams"
+      avatar: "http://examples.org/images/rwilliams"
+    }
+  }
+}

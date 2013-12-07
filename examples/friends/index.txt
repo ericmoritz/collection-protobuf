@@ -1,0 +1,78 @@
+collection {
+  version: "1.0"
+  href: "http://example.org/friends/"
+  links {
+    rel: "feed"
+    href: "http://example.org/friends/rss"
+    prompt: ""
+  }
+  items {
+    href: "http://example.org/friends/jdoe"
+    pb {
+      full_name: "J. Doe"
+      email: "joe@example.org"
+    }
+    links {
+      rel: "blog"
+      href: "http://examples.org/blogs/jdoe"
+      prompt: "Blog"
+    }
+    links {
+      rel: "avatar"
+      href: "http://examples.org/images/jdoe"
+      prompt: "Avatar"
+    }
+  }
+  items {
+    href: "http://example.org/friends/msmith"
+    pb {
+      full_name: "M. Smith"
+      email: "msmith@example.org"
+    }
+    links {
+      rel: "blog"
+      href: "http://examples.org/blogs/msmith"
+      prompt: "Blog"
+    }
+    links {
+      rel: "avatar"
+      href: "http://examples.org/images/msmith"
+      prompt: "Avatar"
+    }
+  }
+  items {
+    href: "http://example.org/friends/rwilliams"
+    pb {
+      full_name: "R. Williams"
+      email: "rwilliams@example.org"
+    }
+    links {
+      rel: "blog"
+      href: "http://examples.org/blogs/rwilliams"
+      prompt: "Blog"
+    }
+    links {
+      rel: "avatar"
+      href: "http://examples.org/images/rwilliams"
+      prompt: "Avatar"
+    }
+  }
+  queries {
+    href: "http://example.org"
+    rel: "search"
+    prompt: "Enter search string"
+    data {
+      name: "search"
+      value: ""
+      prompt: ""
+    }
+  }
+  template {
+    pb {
+      full_name: ""
+      email: ""
+      blog: ""
+      avatar: ""
+    }
+  }
+}
