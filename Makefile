@@ -8,7 +8,7 @@ test: collection.proto
 	@echo "ok."
 
 sw:
-	ispell src/collection+proto.sw
+	ispell -p ./.ispell_english src/collection+proto.sw
 	spiralweb tangle src/collection+proto.sw
 	spiralweb weave src/collection+proto.sw
 
