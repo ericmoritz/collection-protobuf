@@ -5,34 +5,39 @@ import "collection.proto";
 /// Polling base messages
 ///===================================================================
 message Tag {
-  required string key = 1;
-  optional Metadata metadata = 2;
+  optional string key = 1;
+  optional string tag = 2;
+  optional string title = 3;
+  optional string body = 4;
+  optional Metadata metadata = 5;
 }
 
 message Ballot {
-  required string key = 1;
-  required string text = 2;
-  optional Metadata metadata = 3;
-  repeated Tag tags = 4;
+  optional string key = 1;
+  optional string title = 2;
+  optional string body = 3;
+  optional Metadata metadata = 4;
 }
 
 message Question {
-  required string key = 1;
-  required string text = 2;
-  optional Metadata metadata = 3;
-  repeated Tag tags = 4;
+  optional string key = 1;
+  optional string title = 2;
+  optional string body = 3;
+  optional Metadata metadata = 4;
+  optional Ballot ballot = 5;
 }
 
 message Answer {
-  required string key = 1;
-  required string text = 2;
-  optional Metadata metadata = 3;
-  repeated Tag tags = 4;
+  optional string key = 1;
+  optional string title = 2;
+  optional string body = 3;
+  optional Metadata metadata = 4;
+  repeated Tag tags = 5;
+  optional Question question = 6;
 }
 
 message Metadata {
-  optional bytes json_src = 1;
-  repeated Tag tags = 4;
+  optional string json_src = 1;
 }
 
 ///===================================================================
@@ -43,11 +48,13 @@ message BallotCollection {
   optional Ballot template = 2;
   repeated BallotItem items = 3;
   optional collection.Error error = 4;
+  repeated collection.Link links = 5;
 }
 
 message BallotItem {
   optional string href = 1;
-  optional Ballot ballot = 2;
+  optional Ballot data = 2;
+  repeated collection.Link links = 3;
 }
 
 message QuestionCollection {
@@ -56,11 +63,13 @@ message QuestionCollection {
   repeated QuestionItem items = 3;
   optional collection.Error error = 4;
   optional BallotItem ballot = 5;
+  repeated collection.Link links = 6;
 }
 
 message QuestionItem {
   optional string href = 1;
   optional Question data = 2;
+  repeated collection.Link links = 3;
 }
 
 message AnswerCollection {
@@ -69,9 +78,11 @@ message AnswerCollection {
   repeated AnswerItem items = 3;
   optional collection.Error error = 4;
   optional QuestionItem question = 5;
+  repeated collection.Link links = 6;
 }
 
 message AnswerItem {
   optional string href = 1;
   repeated Answer data = 2;
+  repeated collection.Link links = 3;
 }
