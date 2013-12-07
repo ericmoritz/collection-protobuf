@@ -11,9 +11,11 @@ package collection;
 /// http://www.iana.org/assignments/link-relations/link-relations.xhtml
 ///-------------------------------------------------------------------
 message Link {
-  optional string rel = 1;
-  optional string href = 2;
-  optional string title = 3;
+  required string rel = 1;
+  required string href = 2;
+  optional string name = 3;
+  optional string render = 4;
+  optional string prompt = 5;
 }
 
 ///-------------------------------------------------------------------
