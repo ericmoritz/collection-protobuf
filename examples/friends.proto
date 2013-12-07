@@ -1,0 +1,37 @@
+import "collection.proto";
+
+message FriendResource {
+    optional FriendCollection collection = 1;
+}
+
+message FriendCollection {
+  optional string version = 1; 
+  optional string href = 2;	
+  repeated collection.Link links = 3;	
+  repeated FriendItem items = 4;	
+  repeated collection.Query queries = 5;
+  optional FriendTemplate template = 6;
+  optional collection.Error error = 7;	
+}
+
+message FriendTemplate {
+  optional FriendTemplatePB pb = 1;
+}
+
+message FriendTemplatePB {
+  optional string full_name = 1;
+  optional string email = 2;
+  optional string blog = 3;
+  optional string avatar = 4;
+}
+
+message FriendItem {
+  optional string href = 1;
+  optional Friend pb = 2;
+  repeated collection.Link links = 3;
+}
+
+message Friend {
+  optional string full_name = 1;
+  optional string email = 2;
+}

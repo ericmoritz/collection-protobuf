@@ -2,3 +2,7 @@
 parsetab.py
 parser.out
 *.bak
+*.pyc
+examples/*_pb2.py
+examples/friends/*.txt
+examples/friends/*.msg

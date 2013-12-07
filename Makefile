@@ -4,7 +4,9 @@ all: test README.md collection.proto
 
 test: collection.proto
 	@echo "Syntax checking collection.proto"
-	protoc --python_out=/tmp/ collection.proto
+	protoc --python_out=./examples/ collection.proto
+	protoc --python_out=./ examples/friends.proto
+	PYTHONPATH=examples/ python bin/make_friends.py
 	@echo "ok."
 
 sw:
@@ -19,5 +21,5 @@ collection.proto:
 	@make sw
 
 clean:
-	rm -f README.md collection.proto
+	rm -f README.md collection.proto examples/friends/*
 
