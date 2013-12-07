@@ -90,7 +90,7 @@ message type is used to aid extensibility if additional fields need
 to be bundled with the collection. 
 
 ```protobuf
-message {Subject}Resource {
+message (Subject)Resource {
     optional Collection collection; 
 }
 ```
@@ -101,13 +101,13 @@ A `collection+protobuf` Collection message should be shaped like
 this:
 
 ```protobuf
-message {Subject}Collection {
+message (Subject)Collection {
   optional string version;				// SHOULD
   optional string href;					// SHOULD
   repeated Link links;					// MAY
-  repeated {Subject}Item items;			// MAY
+  repeated (Subject)Item items;			// MAY
   repeated Query queries;	            // MAY
-  optional {Subject}Template template;	// MAY
+  optional (Subject)Template template;	// MAY
   optional Error error;					// MAY
 }
 ```
@@ -124,8 +124,8 @@ or edit members of the collection.
 The template message is shaped like:
 
 ```protobuf
-message {Subject}Template {
-  optional{Subject}TemplatePB pb;
+message (Subject)Template {
+  optional (Subject)TemplatePB pb;
 }
 ```
 
@@ -157,9 +157,9 @@ described below.
 An Item message is shaped like this:
 
 ```protobuf
-message {Subject}Item {
+message (Subject)Item {
   optional string href;
-  optional {Subject} pb;
+  optional (Subject) pb;
   repeated Link links;
 }
 ```
