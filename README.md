@@ -170,6 +170,7 @@ processing the request.
 ~~~~~~~~~~~~~~~~~
 
 -->
+
 ```c
 ~~~~~~~~~~~~~~~~~
 message Error {
@@ -205,6 +206,7 @@ The render field MUST be "link" or "image".
 ~~~~~~~~~~~~~~~~~
 
 -->
+
 ```c
 
 ~~~~~~~~~~~~~~~~~
