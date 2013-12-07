@@ -33,8 +33,8 @@ such as JSON.
 
 ## Goals of `collection+protobuf`
 
-1. Avoid ambiguity via structured protobuf messages
-2. Provide a common structure to enable automatic client
+1. Avoid ambiguity by using structured protobuf messages
+2. Provide a universal interface to enable automatic clients
 3. Maintain the same [H Factor](http://amundsen.com/hypermedia/hfactor/) as
    `collection+json`
 4. Maintain structural compatibility with `collection+json` by avoiding to
@@ -43,24 +43,14 @@ such as JSON.
 ## Compatibility with `collection+json`
 
 `collection+protobuf` tries to maintain structural compatibility with
-`collection+json` but favors stronger typing for the data.
+`collection+json` but favors stronger typing for the payload.
 
-While `collection+json` uses an anonymous objects for `data` fields that are
-shaped like:
+`collection+protobuf`'s uses `pb` to prevent conflicts with services
+that want to provide a simpler `collection+json` `data` field.
 
-```JSON
-{"prompt" : STRING, "name" : STRING, "value" : VALUE}
-```
-
-`collection+protobuf` uses the field `pb` for structured protobuf messages.
-
-The schema-less format of `collection+json`'s `data` field leads to the
-kind of ambiguity that `collection+protobuf` is trying to avoid. This is
-why `collection+protobuf` uses `pb` for its payload.
-
-Services that want to maintain strict compatibility with
-`collection+json` are free use repeated `DataField` messages 
-in `Template.data` and `Item.data` messages.
+Services that want to maintain compatibility with `collection+json`
+are free use repeated `DataField` messages in `Template.data` and
+`Item.data` messages.
 
 This `data` field is assumed ignored by `collection+protobuf` services.
 
