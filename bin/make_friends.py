@@ -56,11 +56,15 @@ def query(msg,
     return msg         
 
 
-def template(msg):
-    msg.pb.full_name = ""
-    msg.pb.email = ""
-    msg.pb.blog = ""
-    msg.pb.avatar = ""
+def template(msg, 
+             full_name="",
+             email="",
+             blog="",
+             avatar=""):
+    msg.pb.full_name = full_name
+    msg.pb.email = email
+    msg.pb.blog = blog
+    msg.pb.avatar = avatar
 
 
 def skel_resource():
@@ -143,7 +147,7 @@ def key(item):
 def main():
     resource_msg = resource()
     skel = skel_resource()
-    members = imap(lambda item: member_resource(skel, item), 
+    members = map(lambda item: member_resource(skel, item), 
                    resource_msg.collection.items)
 
     save("index", resource_msg)
@@ -152,6 +156,27 @@ def main():
         save(key(member.collection.items[0]),
              member)
 
+    template_resource = FriendResource()
+    template(
+        template_resource.collection.template,
+        full_name="W. Chandry",
+        email="wchandry@example.org",
+        blog="http://example.org/blogs/wchandry",
+        avatar="http://example.org/images/wchandry")
+
+    save("write_template",
+         template_resource.collection)
+
+    error_resource = FriendResource()
+    error_resource.collection.version = "1.0"
+    error_resource.collection.href = "http://example.org/friends/"
+    error_resource.collection.error.title = "Server Error"
+    error_resource.collection.error.code = "X1C2"    
+    error_resource.collection.error.message = "The server have encountered an error, please wait and try again."
+
+    save("error",
+         error_resource)
+        
 if __name__ == '__main__':
     main()
     

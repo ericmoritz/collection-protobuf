@@ -1,0 +1,8 @@
+template {
+  pb {
+    full_name: "W. Chandry"
+    email: "wchandry@example.org"
+    blog: "http://example.org/blogs/wchandry"
+    avatar: "http://example.org/images/wchandry"
+  }
+}
