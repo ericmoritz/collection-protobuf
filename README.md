@@ -132,25 +132,28 @@ A Resource message wraps a collection message.  The resource
 message type is used to aid extensibility if additional fields need
 to be bundled with the collection. 
 
-    message Resource {
-        optional Collection collection; 
-    }
+```protobuf
+message Resource {
+    optional Collection collection; 
+}
+```
 
 ## Collection messages
 
 A `collection+protobuf` Collection message should be shaped like
 this:
 
-    message Collection {
-	  optional string version;  // SHOULD
-      optional string href;		// SHOULD
-      repeated Link links;		// MAY
-      repeated ____ items;		// MAY
-      repeated Query queries;	// MAY
-      optional ____ template;	// MAY
-      optional Error error;		// MAY
-    }
-
+```protobuf
+message Collection {
+  optional string version;  // SHOULD
+  optional string href;		// SHOULD
+  repeated Link links;		// MAY
+  repeated ____ items;		// MAY
+  repeated Query queries;	// MAY
+  optional ____ template;	// MAY
+  optional Error error;		// MAY
+}
+```
 
 Obviously, for brevity, message declarations can omit any optional or
 repeated fields that are not used by resource.  A client **MUST** support
@@ -163,9 +166,11 @@ or edit members of the collection.
 
 The template message is shaped like:
 
-    message Template {
-      optional ____ pb;
-    }
+```protobuf
+message Template {
+  optional ____ pb;
+}
+```
     
 A `POST` of this object to the collection's `href` will create a new
 resource if `POST` is allowed.

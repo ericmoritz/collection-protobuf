@@ -124,9 +124,11 @@ or edit members of the collection.
 
 The template message is shaped like:
 
-    message Template {
-      optional ____ pb;
-    }
+```protobuf
+message Template {
+  optional ____ pb;
+}
+```
     
 A `POST` of this object to the collection's `href` will create a new
 resource if `POST` is allowed.
