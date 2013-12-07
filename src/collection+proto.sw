@@ -28,39 +28,41 @@ package collection;
 specification using
 [Protocol Buffers](https://developers.google.com/protocol-buffers/docs/overview)
 to provide a structure for a language-neutral, extensible, hypermedia
-RESTful service that avoids the ambuquility of a schemaless format
+RESTful service that avoids the ambiguity of a schema-less format
 such as JSON.
 
 ## Goals of `collection+protobuf`
 
-1. Avoid ambuquility via structured protobuf messages
+1. Avoid ambiguity via structured protobuf messages
 2. Provide a common structure to enable automatic client
 3. Maintain the same [H Factor](http://amundsen.com/hypermedia/hfactor/) as
    `collection+json`
-4. Maintain structural compatibility with `collection+json` where doing
-   so would not sacrifice other goals.
+4. Maintain structural compatibility with `collection+json` by avoiding to
+   redefine any `collection+json` fields. This will aid automatic conversion.
 
 ## Compatibility with `collection+json`
 
 `collection+protobuf` tries to maintain structural compatibility with
-`collection+json` but favors stronger typing for the `data` fields.
+`collection+json` but favors stronger typing for the data.
 
-`collection+json` uses an anonymous objects for `data` fields that are
+While `collection+json` uses an anonymous objects for `data` fields that are
 shaped like:
 
-```json
+```JSON
 {"prompt" : STRING, "name" : STRING, "value" : VALUE}
 ```
 
-This schema-less format leads to the kind of ambiguity that
-`collection+protobuf` is trying to avoid.
+`collection+protobuf` uses the field `pb` for structured protobuf messages.
+
+The schema-less format of `collection+json`'s `data` field leads to the
+kind of ambiguity that `collection+protobuf` is trying to avoid. This is
+why `collection+protobuf` uses `pb` for its payload.
 
 Services that want to maintain strict compatibility with
-`collection+json` are free to shape their `data` messages as repeated
-`DataField` messages or write a translation layer in their service.
+`collection+json` are free use repeated `DataField` messages 
+in `Template.data` and `Item.data` messages.
 
-We believe this is a valid trade-off to met the goals of
-`collection+proto`.
+This `data` field is assumed ignored by `collection+protobuf` services.
 
 If your service does convert a `collection+protobuf` message to `JSON`
 don't call the resource `application/vnd.collection+json` unless it
@@ -74,7 +76,7 @@ format.
 ## Profiles
 
 Like `collection+json`, `collection+protobuf` supports the use of
-sematic profiles to link to the `.proto` file that the resource is
+semantic profiles to link to the `.proto` file that the resource is
 defined in:
 
     application/vnd.collection+protobuf;profile=http://example.com/polling.proto#polling.QuestionCollection
@@ -88,25 +90,28 @@ A Resource message wraps a collection message.  The resource
 message type is used to aid extensibility if additional fields need
 to be bundled with the collection. 
 
-    message Resource {
-        optional Collection collection; 
-    }
+```protobuf
+message Resource {
+    optional Collection collection; 
+}
+```
 
 ## Collection messages
 
 A `collection+protobuf` Collection message should be shaped like
 this:
 
-    message Collection {
-	  optional string version;  // SHOULD
-      optional string href;		// SHOULD
-      repeated Link links;		// MAY
-      repeated ____ items;		// MAY
-      repeated Query queries;	// MAY
-      optional ____ template;	// MAY
-      optional Error error;		// MAY
-    }
-
+```protobuf
+message Collection {
+  optional string version;  // SHOULD
+  optional string href;		// SHOULD
+  repeated Link links;		// MAY
+  repeated ____ items;		// MAY
+  repeated Query queries;	// MAY
+  optional ____ template;	// MAY
+  optional Error error;		// MAY
+}
+```
 
 Obviously, for brevity, message declarations can omit any optional or
 repeated fields that are not used by resource.  A client **MUST** support
@@ -119,9 +124,11 @@ or edit members of the collection.
 
 The template message is shaped like:
 
-    message Template {
-      optional ____ data;
-    }
+```protobuf
+message Template {
+  optional ____ pb;
+}
+```
     
 A `POST` of this object to the collection's `href` will create a new
 resource if `POST` is allowed.
@@ -139,25 +146,26 @@ described below.
 
 An Item message is shaped like this:
 
-``c 
+```protobuf
 
 message Item {
   optional string href;
-  optional _ data;
+  optional _ pb;
   repeated Link links;
 }
 
 ```
 
-### Item.data
+### Item.pb
 
-The `Item.data` field will be of the type of the subject of the
+The `Item.pb` field will be of the type of the subject of the
 collection.
+
 
 
 ## Error message
 
-The error message is used to express that an error that occured
+The error message is used to express that an error that occurred
 processing the request.
 
 <!-- 
@@ -169,21 +177,20 @@ processing the request.
 ///-------------------------------------------------------------------
 @=
 -->
-```c
+
+```protobuf
 @code collection.proto
 message Error {
   optional string title = 1;
   optional string code = 2;
   optional string message = 3;
 }
-
 @=
-
 ```
 
 ## Link message
 
-The link message is used by Collection mesasges and Item messages to
+The link message is used by Collection messages and Item messages to
 get all hyper on.
 
 Link relations are thoughtfully described at
@@ -204,8 +211,8 @@ The render field MUST be "link" or "image".
 ///-------------------------------------------------------------------
 @=
 -->
-```c
 
+```protobuf
 @code collection.proto
 message Link {
   required string rel = 1;
@@ -214,7 +221,6 @@ message Link {
   optional string render = 4 [default="link"];
   optional string prompt = 5;
 }
-
 @=
 ```
 
@@ -242,9 +248,8 @@ The name/value pairs of the `data` messages can be combined with the
 
 -->
 
-```c
+```protobuf
 @code collection.proto
-
 message Query {
   required string href = 1;
   required string rel = 2;
@@ -252,9 +257,7 @@ message Query {
   optional string prompt = 4;
   repeated DataField data = 5;
 }
-
 @=
-
 ```
 
 ## DataField message
@@ -273,8 +276,7 @@ The DataField message is used by the Query message to describe a query template
 
 -->
 
-```c
-
+```protobuf
 @code collection.proto
 
 message DataField {
@@ -282,11 +284,13 @@ message DataField {
   optional string value = 2;
   optional string prompt = 3;
 }
-
 @=
-
 ```
 
-The DataField message MAY be used with Template.data and Item.data to maintain
-compatibility with `collection+json` at the sacriface of explicit typing.
+The DataField message MAY be used with `Template.data` and `Item.data`
+to maintain compatibility with `collection+json` without sacrifice of
+explicit typing.
+
+The `Template.data` and `Item.data` field MUST be ignored by
+`collection+protobuf` services.
 
