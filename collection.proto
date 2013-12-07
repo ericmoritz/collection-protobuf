@@ -1,10 +1,11 @@
+package collection;
 ///===================================================================
 /// Collection+Protobuf messages
 ///===================================================================
-package collection;
 
 // Documentation can be found at
 // <https://github.com/ericmoritz/collection-protobuf/>
+
 ///-------------------------------------------------------------------
 /// An Error message used to convey the latest error condition
 /// produced by a fault
@@ -29,6 +30,7 @@ message Link {
   optional string render = 4 [default="link"];
   optional string prompt = 5;
 }
+
 ///-------------------------------------------------------------------
 /// A Query message for describing how to make queries
 ///

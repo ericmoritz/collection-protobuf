@@ -4,13 +4,14 @@
 <!--
 
 @code collection.proto [out=collection.proto]
+package collection;
 ///===================================================================
 /// Collection+Protobuf messages
 ///===================================================================
-package collection;
 
 // Documentation can be found at
 // <https://github.com/ericmoritz/collection-protobuf/>
+
 @=
 
 -->
@@ -162,8 +163,6 @@ processing the request.
 <!-- 
 @code collection.proto
 
-
-
 ///-------------------------------------------------------------------
 /// An Error message used to convey the latest error condition
 /// produced by a fault
@@ -215,6 +214,7 @@ message Link {
   optional string render = 4 [default="link"];
   optional string prompt = 5;
 }
+
 @=
 ```
 
@@ -230,6 +230,7 @@ The name/value pairs of the `data` messages can be combined with the
 
 <!--
 @code collection.proto
+
 
 ///-------------------------------------------------------------------
 /// A Query message for describing how to make queries
@@ -262,7 +263,6 @@ The DataField message is used by the Query message to describe a query template
 
 <!--
 @code collection.proto
-
 
 ///-------------------------------------------------------------------
 /// The DataField message is used by the Query message to describe a

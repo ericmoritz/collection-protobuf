@@ -1,13 +1,14 @@
 <!--
 
 ~~~~~~~~~~~~~~~~~
+package collection;
 ///===================================================================
 /// Collection+Protobuf messages
 ///===================================================================
-package collection;
 
 // Documentation can be found at
 // <https://github.com/ericmoritz/collection-protobuf/>
+
 ~~~~~~~~~~~~~~~~~
 
 
@@ -211,6 +212,7 @@ message Link {
   optional string render = 4 [default="link"];
   optional string prompt = 5;
 }
+
 ~~~~~~~~~~~~~~~~~
 
 ```
