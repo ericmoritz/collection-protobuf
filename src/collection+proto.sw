@@ -174,6 +174,7 @@ processing the request.
 -->
 
 ```javascript
+
 @code collection.proto
 message Error {
   optional string title = 1;
@@ -248,6 +249,7 @@ The name/value pairs of the `data` messages can be combined with the
 -->
 
 ```javascript
+
 @code collection.proto
 
 message Query {

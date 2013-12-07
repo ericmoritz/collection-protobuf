@@ -172,6 +172,7 @@ processing the request.
 -->
 
 ```javascript
+
 ~~~~~~~~~~~~~~~~~
 message Error {
   optional string title = 1;
@@ -246,6 +247,7 @@ The name/value pairs of the `data` messages can be combined with the
 -->
 
 ```javascript
+
 ~~~~~~~~~~~~~~~~~
 message Query {
   required string href = 1;
