@@ -4,6 +4,16 @@
 package collection;
 
 ///-------------------------------------------------------------------
+/// An Error message used to convey the latest error condition
+/// produced by a fault
+///-------------------------------------------------------------------
+message Error {
+  optional string title = 1;
+  optional string code = 2;
+  optional string message = 3;
+}
+
+///-------------------------------------------------------------------
 /// A Link message for Collection.links & Item.links
 ///
 /// To get all hyper on. 
@@ -40,12 +50,3 @@ message DataField {
   optional string prompt = 3;
 }
 
-///-------------------------------------------------------------------
-/// An Error message used to convey the latest error condition
-/// produced by a fault
-///-------------------------------------------------------------------
-message Error {
-  optional string title = 1;
-  optional string code = 2;
-  optional string msg = 3; // the message keyword is reserved
-}
