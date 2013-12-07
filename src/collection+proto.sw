@@ -48,7 +48,7 @@ such as JSON.
 While `collection+json` uses an anonymous objects for `data` fields that are
 shaped like:
 
-```Con
+```JSON
 {"prompt" : STRING, "name" : STRING, "value" : VALUE}
 ```
 
@@ -141,7 +141,7 @@ described below.
 
 An Item message is shaped like this:
 
-```C
+```protobuf
 
 message Item {
   optional string href;
@@ -173,7 +173,7 @@ processing the request.
 @=
 -->
 
-```C
+```protobuf
 @code collection.proto
 message Error {
   optional string title = 1;
@@ -207,7 +207,7 @@ The render field MUST be "link" or "image".
 @=
 -->
 
-```C
+```protobuf
 @code collection.proto
 message Link {
   required string rel = 1;
@@ -243,7 +243,7 @@ The name/value pairs of the `data` messages can be combined with the
 
 -->
 
-```C
+```protobuf
 @code collection.proto
 message Query {
   required string href = 1;
@@ -271,7 +271,7 @@ The DataField message is used by the Query message to describe a query template
 
 -->
 
-```C
+```protobuf
 @code collection.proto
 
 message DataField {
