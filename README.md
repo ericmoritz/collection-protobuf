@@ -26,12 +26,12 @@ package collection;
 specification using
 [Protocol Buffers](https://developers.google.com/protocol-buffers/docs/overview)
 to provide a structure for a language-neutral, extensible, hypermedia
-RESTful service that avoids the ambuquility of a schemaless format
+RESTful service that avoids the ambiguity of a schema-less format
 such as JSON.
 
 ## Goals of `collection+protobuf`
 
-1. Avoid ambuquility via structured protobuf messages
+1. Avoid ambiguity via structured protobuf messages
 2. Provide a common structure to enable automatic client
 3. Maintain the same [H Factor](http://amundsen.com/hypermedia/hfactor/) as
    `collection+json`
@@ -50,7 +50,7 @@ shaped like:
 {"prompt" : STRING, "name" : STRING, "value" : VALUE}
 ```
 
-`collection+protbuf` uses the field `pb` for structured protobuf messages.
+`collection+protobuf` uses the field `pb` for structured protobuf messages.
 
 The schema-less format of `collection+json`'s `data` field leads to the
 kind of ambiguity that `collection+protobuf` is trying to avoid. This is
@@ -74,7 +74,7 @@ format.
 ## Profiles
 
 Like `collection+json`, `collection+protobuf` supports the use of
-sematic profiles to link to the `.proto` file that the resource is
+semantic profiles to link to the `.proto` file that the resource is
 defined in:
 
     application/vnd.collection+protobuf;profile=http://example.com/polling.proto#polling.QuestionCollection
@@ -158,7 +158,7 @@ collection.
 
 ## Error message
 
-The error message is used to express that an error that occured
+The error message is used to express that an error that occurred
 processing the request.
 
 <!-- 
@@ -185,7 +185,7 @@ message Error {
 
 ## Link message
 
-The link message is used by Collection mesasges and Item messages to
+The link message is used by Collection messages and Item messages to
 get all hyper on.
 
 Link relations are thoughtfully described at
@@ -289,7 +289,7 @@ message DataField {
 ```
 
 The DataField message MAY be used with `Template.data` and `Item.data`
-to maintain compatibility with `collection+json` without sacriface of
+to maintain compatibility with `collection+json` without sacrifice of
 explicit typing.
 
 The `Template.data` and `Item.data` field MUST be ignored by
