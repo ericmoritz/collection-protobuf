@@ -9,9 +9,8 @@ test: collection.proto
 
 sw:
 	ispell -p ./.ispell_english src/collection+proto.sw
-	spiralweb tangle src/collection+proto.sw
-	spiralweb weave src/collection+proto.sw
-
+	# use my fork: https://github.com/ericmoritz/spiralweb
+	spiralweb src/collection+proto.sw
 
 README.md:
 
