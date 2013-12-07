@@ -1,3 +1,5 @@
+@doc collection+proto [out=README.md]
+
 # collection+protobuf - Document format
 
 This document is written in a literate programming style. 
@@ -120,15 +122,15 @@ described below.
 
 An Item message is shaped like this:
 
-~~~~~~~~~~~~~~~~~
+@code collection.proto [out=collection.proto]
+
     message Item {
       optional string href;
       optional _ data;
       repeated Link links;
     }
 
-~~~~~~~~~~~~~~~~~
-
+@=
 
 ### Item.data
 
@@ -141,15 +143,15 @@ collection.
 The error message is used to express that an error that occured
 processing the request.
 
-~~~~~~~~~~~~~~~~~
+@code collection.proto
+
     message Error {
       optional string title = 1;
       optional string code = 2;
       optional string message = 3;
     }
 
-~~~~~~~~~~~~~~~~~
-
+@=
 
 ## Link message
 
@@ -161,7 +163,8 @@ http://amundsen.com/media-types/linkrelations/
 
 The render field MUST be "link" or "image".
 
-~~~~~~~~~~~~~~~~~
+@code collection.proto
+
     message Link {
       required string rel = 1;
       required string href = 2;
@@ -170,8 +173,7 @@ The render field MUST be "link" or "image".
       optional string prompt = 5;
     }
 
-~~~~~~~~~~~~~~~~~
-
+@=
 
 > NOTE: It is up for debate if we should use an enum for the render
 > field; I chose a string to make conversion to JSON easier.
@@ -183,7 +185,8 @@ A Query message for describing how to make queries
 The name/value pairs of the `data` messages can be combined with the
 `href` field to make GET requests.
 
-~~~~~~~~~~~~~~~~~
+@code collection.proto
+
     message Query {
       required string href = 1;
       required string rel = 2;
@@ -192,22 +195,21 @@ The name/value pairs of the `data` messages can be combined with the
       repeated DataField data = 5;
     }
 
-~~~~~~~~~~~~~~~~~
-
+@=
 
 ## DataField message
     
 The DataField message is used by the Query message to describe a query template
 
-~~~~~~~~~~~~~~~~~
+@code collection.proto
+
     message DataField {
       required string name = 1;
       optional string value = 2;
       optional string prompt = 3;
     }
 
-~~~~~~~~~~~~~~~~~
-
+@=
 
 The DataField message MAY be used with Template.data and Item.data to maintain
 compatibility with `collection+json` at the sacriface of explicit typing.

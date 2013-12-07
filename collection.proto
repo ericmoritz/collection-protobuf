@@ -1,52 +1,34 @@
-///===================================================================
-/// Collection+Protobuf messages
-///===================================================================
-package collection;
+    message Item {
+      optional string href;
+      optional _ data;
+      repeated Link links;
+    }
 
-///-------------------------------------------------------------------
-/// An Error message used to convey the latest error condition
-/// produced by a fault
-///-------------------------------------------------------------------
-message Error {
-  optional string title = 1;
-  optional string code = 2;
-  optional string message = 3;
-}
+    message Error {
+      optional string title = 1;
+      optional string code = 2;
+      optional string message = 3;
+    }
 
-///-------------------------------------------------------------------
-/// A Link message for Collection.links & Item.links
-///
-/// To get all hyper on. 
-/// List of official link relations: 
-/// http://www.iana.org/assignments/link-relations/link-relations.xhtml
-///-------------------------------------------------------------------
-message Link {
-  required string rel = 1;
-  required string href = 2;
-  optional string name = 3;
-  optional string render = 4;
-  optional string prompt = 5;
-}
+    message Link {
+      required string rel = 1;
+      required string href = 2;
+      optional string name = 3;
+      optional string render = 4 [default="link"];
+      optional string prompt = 5;
+    }
 
-///-------------------------------------------------------------------
-/// A Query message for describing how to make queries
-///
-/// Clients can use this object to construct URLs to GET
-/// The Query.data field are query parameters.
-///-------------------------------------------------------------------
-message Query {
-  optional string rel = 1;
-  optional string href = 2;
-  optional string prompt = 3;
-  repeated DataField data = 4;
-}
+    message Query {
+      required string href = 1;
+      required string rel = 2;
+      optional string name = 3;
+      optional string prompt = 4;
+      repeated DataField data = 5;
+    }
 
-///-------------------------------------------------------------------
-/// A DataField message for clients to use to fill in
-///-------------------------------------------------------------------
-message DataField {
-  required string name = 1;
-  optional string value = 2;
-  optional string prompt = 3;
-}
+    message DataField {
+      required string name = 1;
+      optional string value = 2;
+      optional string prompt = 3;
+    }
 
