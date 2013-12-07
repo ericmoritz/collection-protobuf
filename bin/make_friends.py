@@ -130,7 +130,7 @@ def member_resource(skel, item):
 
 def save(key, msg):
     basename = "examples/friends/{key}".format(**locals())
-    with open(basename + ".msg", "wb") as fh:
+    with open(basename + ".pbf", "wb") as fh:
         fh.write(msg.SerializeToString())
 
     with open(basename + ".txt", "wb") as fh:
