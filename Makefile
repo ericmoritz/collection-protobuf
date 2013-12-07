@@ -3,8 +3,8 @@
 all: README.md collection.proto
 
 sw:
-	spiralweb tangle collection+proto.sw
-	spiralweb weave collection+proto.sw
+	spiralweb tangle src/collection+proto.sw
+	spiralweb weave src/collection+proto.sw
 
 
 README.md:

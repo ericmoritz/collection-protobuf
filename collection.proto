@@ -1,34 +1,56 @@
-    message Item {
-      optional string href;
-      optional _ data;
-      repeated Link links;
-    }
+///===================================================================
+/// Collection+Protobuf messages
+///===================================================================
+package collection;
 
-    message Error {
-      optional string title = 1;
-      optional string code = 2;
-      optional string message = 3;
-    }
+// Documentation can be found at
+// <https://github.com/ericmoritz/collection-protobuf/>
+///-------------------------------------------------------------------
+/// An Error message used to convey the latest error condition
+/// produced by a fault
+///-------------------------------------------------------------------
+message Error {
+  optional string title = 1;
+  optional string code = 2;
+  optional string message = 3;
+}
 
-    message Link {
-      required string rel = 1;
-      required string href = 2;
-      optional string name = 3;
-      optional string render = 4 [default="link"];
-      optional string prompt = 5;
-    }
+///-------------------------------------------------------------------
+/// A Link message for Collection.links & Item.links
+///
+/// To get all hyper on.
+/// List of official link relations:
+/// http://www.iana.org/assignments/link-relations/link-relations.xhtml
+///-------------------------------------------------------------------
+message Link {
+  required string rel = 1;
+  required string href = 2;
+  optional string name = 3;
+  optional string render = 4 [default="link"];
+  optional string prompt = 5;
+}
+///-------------------------------------------------------------------
+/// A Query message for describing how to make queries
+///
+/// The name/value pairs of the `data` messages can be combined with the
+/// `href` field to make GET requests.
+///-------------------------------------------------------------------
+message Query {
+  required string href = 1;
+  required string rel = 2;
+  optional string name = 3;
+  optional string prompt = 4;
+  repeated DataField data = 5;
+}
 
-    message Query {
-      required string href = 1;
-      required string rel = 2;
-      optional string name = 3;
-      optional string prompt = 4;
-      repeated DataField data = 5;
-    }
+///-------------------------------------------------------------------
+/// The DataField message is used by the Query message to describe a
+/// query template
+///-------------------------------------------------------------------
 
-    message DataField {
-      required string name = 1;
-      optional string value = 2;
-      optional string prompt = 3;
-    }
+message DataField {
+  required string name = 1;
+  optional string value = 2;
+  optional string prompt = 3;
+}
 

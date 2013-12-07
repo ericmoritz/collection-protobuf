@@ -1,8 +1,21 @@
+% -*- markdown -*-
 @doc collection+proto [out=README.md]
 
-# collection+protobuf - Document format
+<!--
 
-This document is written in a literate programming style. 
+@code collection.proto [out=collection.proto]
+///===================================================================
+/// Collection+Protobuf messages
+///===================================================================
+package collection;
+
+// Documentation can be found at
+// <https://github.com/ericmoritz/collection-protobuf/>
+@=
+
+-->
+
+# collection+protobuf - Document format
 
 > NOTE: The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
 > NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL"
@@ -34,7 +47,9 @@ such as JSON.
 `collection+json` uses an anonymous objects for `data` fields that are
 shaped like:
 
-    {"prompt" : STRING, "name" : STRING, "value" : VALUE}
+```json
+{"prompt" : STRING, "name" : STRING, "value" : VALUE}
+```
 
 This schema-less format leads to the kind of ambiguity that
 `collection+protobuf` is trying to avoid.
@@ -118,19 +133,20 @@ if `PUT` is allowed on that resource.
 The `Collection.items` repeated message is shaped like an Item message
 described below.
 
+
 ## Item messages
 
 An Item message is shaped like this:
 
-@code collection.proto [out=collection.proto]
+``c 
 
-    message Item {
-      optional string href;
-      optional _ data;
-      repeated Link links;
-    }
+message Item {
+  optional string href;
+  optional _ data;
+  repeated Link links;
+}
 
-@=
+```
 
 ### Item.data
 
@@ -143,15 +159,28 @@ collection.
 The error message is used to express that an error that occured
 processing the request.
 
+<!-- 
 @code collection.proto
 
-    message Error {
-      optional string title = 1;
-      optional string code = 2;
-      optional string message = 3;
-    }
+
+
+///-------------------------------------------------------------------
+/// An Error message used to convey the latest error condition
+/// produced by a fault
+///-------------------------------------------------------------------
+@=
+-->
+```c
+@code collection.proto
+message Error {
+  optional string title = 1;
+  optional string code = 2;
+  optional string message = 3;
+}
 
 @=
+
+```
 
 ## Link message
 
@@ -163,17 +192,31 @@ http://amundsen.com/media-types/linkrelations/
 
 The render field MUST be "link" or "image".
 
+<!--
 @code collection.proto
 
-    message Link {
-      required string rel = 1;
-      required string href = 2;
-      optional string name = 3;
-      optional string render = 4 [default="link"];
-      optional string prompt = 5;
-    }
 
+///-------------------------------------------------------------------
+/// A Link message for Collection.links & Item.links
+///
+/// To get all hyper on.
+/// List of official link relations:
+/// http://www.iana.org/assignments/link-relations/link-relations.xhtml
+///-------------------------------------------------------------------
 @=
+-->
+```c
+
+@code collection.proto
+message Link {
+  required string rel = 1;
+  required string href = 2;
+  optional string name = 3;
+  optional string render = 4 [default="link"];
+  optional string prompt = 5;
+}
+@=
+```
 
 > NOTE: It is up for debate if we should use an enum for the render
 > field; I chose a string to make conversion to JSON easier.
@@ -185,31 +228,64 @@ A Query message for describing how to make queries
 The name/value pairs of the `data` messages can be combined with the
 `href` field to make GET requests.
 
+<!--
 @code collection.proto
 
-    message Query {
-      required string href = 1;
-      required string rel = 2;
-      optional string name = 3;
-      optional string prompt = 4;
-      repeated DataField data = 5;
-    }
+///-------------------------------------------------------------------
+/// A Query message for describing how to make queries
+///
+/// The name/value pairs of the `data` messages can be combined with the
+/// `href` field to make GET requests.
+///-------------------------------------------------------------------
+@=
+
+-->
+
+```c
+@code collection.proto
+
+message Query {
+  required string href = 1;
+  required string rel = 2;
+  optional string name = 3;
+  optional string prompt = 4;
+  repeated DataField data = 5;
+}
 
 @=
+
+```
 
 ## DataField message
     
 The DataField message is used by the Query message to describe a query template
 
+<!--
 @code collection.proto
 
-    message DataField {
-      required string name = 1;
-      optional string value = 2;
-      optional string prompt = 3;
-    }
+
+///-------------------------------------------------------------------
+/// The DataField message is used by the Query message to describe a
+/// query template
+///-------------------------------------------------------------------
 
 @=
+
+-->
+
+```c
+
+@code collection.proto
+
+message DataField {
+  required string name = 1;
+  optional string value = 2;
+  optional string prompt = 3;
+}
+
+@=
+
+```
 
 The DataField message MAY be used with Template.data and Item.data to maintain
 compatibility with `collection+json` at the sacriface of explicit typing.
