@@ -87,8 +87,9 @@ such as JSON.
 `collection+protobuf` tries to maintain structural compatibility with
 `collection+json` but favors stronger typing for the payload.
 
-`collection+protobuf`'s uses `pb` to prevent conflicts with services
-that want to provide a simpler `collection+json` `data` field.
+`collection+protobuf` uses a `pb` field to prevent conflicts with
+services that want to provide a simpler `collection+json` `data`
+field.
 
 Services that want to maintain compatibility with `collection+json`
 are free use repeated `DataField` messages in `Template.data` and
