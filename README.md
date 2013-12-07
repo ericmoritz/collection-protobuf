@@ -35,30 +35,32 @@ such as JSON.
 2. Provide a common structure to enable automatic client
 3. Maintain the same [H Factor](http://amundsen.com/hypermedia/hfactor/) as
    `collection+json`
-4. Maintain structural compatibility with `collection+json` where doing
-   so would not sacrifice other goals.
+4. Maintain structural compatibility with `collection+json` by avoiding to
+   redefine any `collection+json` fields. This will aid automatic conversion.
 
 ## Compatibility with `collection+json`
 
 `collection+protobuf` tries to maintain structural compatibility with
-`collection+json` but favors stronger typing for the `data` fields.
+`collection+json` but favors stronger typing for the data.
 
-`collection+json` uses an anonymous objects for `data` fields that are
+While `collection+json` uses an anonymous objects for `data` fields that are
 shaped like:
 
 ```json
 {"prompt" : STRING, "name" : STRING, "value" : VALUE}
 ```
 
-This schema-less format leads to the kind of ambiguity that
-`collection+protobuf` is trying to avoid.
+`collection+protbuf` uses the field `pb` for structured protobuf messages.
+
+The schema-less format of `collection+json`'s `data` field leads to the
+kind of ambiguity that `collection+protobuf` is trying to avoid. This is
+why `collection+protobuf` uses `pb` for its payload.
 
 Services that want to maintain strict compatibility with
-`collection+json` are free to shape their `data` messages as repeated
-`DataField` messages or write a translation layer in their service.
+`collection+json` are free use repeated `DataField` messages 
+in `Template.data` and `Item.data` messages.
 
-We believe this is a valid trade-off to met the goals of
-`collection+proto`.
+This `data` field is assumed ignored by `collection+protobuf` services.
 
 If your service does convert a `collection+protobuf` message to `JSON`
 don't call the resource `application/vnd.collection+json` unless it
@@ -118,7 +120,7 @@ or edit members of the collection.
 The template message is shaped like:
 
     message Template {
-      optional ____ data;
+      optional ____ pb;
     }
     
 A `POST` of this object to the collection's `href` will create a new
@@ -141,16 +143,17 @@ An Item message is shaped like this:
 
 message Item {
   optional string href;
-  optional _ data;
+  optional _ pb;
   repeated Link links;
 }
 
 ```
 
-### Item.data
+### Item.pb
 
-The `Item.data` field will be of the type of the subject of the
+The `Item.pb` field will be of the type of the subject of the
 collection.
+
 
 
 ## Error message
@@ -285,6 +288,10 @@ message DataField {
 
 ```
 
-The DataField message MAY be used with Template.data and Item.data to maintain
-compatibility with `collection+json` at the sacriface of explicit typing.
+The DataField message MAY be used with `Template.data` and `Item.data`
+to maintain compatibility with `collection+json` without sacriface of
+explicit typing.
+
+The `Template.data` and `Item.data` field MUST be ignored by
+`collection+protobuf` services.
 
