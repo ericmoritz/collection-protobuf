@@ -172,6 +172,7 @@ processing the request.
 ///-------------------------------------------------------------------
 @=
 -->
+
 ```c
 @code collection.proto
 message Error {
@@ -207,6 +208,7 @@ The render field MUST be "link" or "image".
 ///-------------------------------------------------------------------
 @=
 -->
+
 ```c
 
 @code collection.proto
