@@ -329,7 +329,7 @@ explicit typing.
 The `Template.data` and `Item.data` field MUST be ignored by
 `collection+protobuf` services.
 
-## Examples and Utilities
+## Examples
 
 In the `examples/` directory is a `friends.proto` that demonstrates
 conversion of the `collection+json`
@@ -338,3 +338,45 @@ conversion of the `collection+json`
 
 In the `examples/friends/` are text protobuf messages and binary
 protobuf messages for the converted examples.
+
+## Utilities
+
+To make .proto file creation easier there is a script called
+`bin/new_collection.sh` that will generate a skeleton .proto file
+
+```sh
+$ ./bin/new_collection.sh Car
+import "collection.proto";
+
+message CarResource {
+    optional CarCollection collection = 1;
+}
+
+message CarCollection {
+  optional string version = 1; 
+  optional string href = 2;	
+  repeated collection.Link links = 3;	
+  repeated CarItem items = 4;	
+  repeated collection.Query queries = 5;
+  optional CarTemplate template = 6;
+  optional collection.Error error = 7;	
+}
+
+message CarTemplate {
+  optional CarTemplatePB pb = 1;
+}
+
+message CarTemplatePB {
+
+}
+
+message CarItem {
+  optional string href = 1;
+  optional Car pb = 2;
+  repeated collection.Link links = 3;
+}
+
+message Car {
+
+}
+```

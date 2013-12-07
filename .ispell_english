@@ -2,6 +2,11 @@ amundsen
 avatar
 blog
 blogs
+CarCollection
+CarItem
+CarResource
+CarTemplate
+CarTemplatePB
 com
 DataField
 doc
@@ -33,6 +38,7 @@ QuestionCollection
 rel
 RESTful
 rfc
+sh
 TemplatePB
 vnd
 www
