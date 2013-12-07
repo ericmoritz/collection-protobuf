@@ -141,7 +141,7 @@ described below.
 
 An Item message is shaped like this:
 
-``c 
+```javascript
 
 message Item {
   optional string href;
@@ -173,7 +173,7 @@ processing the request.
 @=
 -->
 
-```c
+```javascript
 @code collection.proto
 message Error {
   optional string title = 1;
@@ -209,7 +209,7 @@ The render field MUST be "link" or "image".
 @=
 -->
 
-```c
+```javascript
 
 @code collection.proto
 message Link {
@@ -247,7 +247,7 @@ The name/value pairs of the `data` messages can be combined with the
 
 -->
 
-```c
+```javascript
 @code collection.proto
 
 message Query {
@@ -278,7 +278,7 @@ The DataField message is used by the Query message to describe a query template
 
 -->
 
-```c
+```javascript
 
 @code collection.proto
 
