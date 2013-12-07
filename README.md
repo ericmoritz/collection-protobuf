@@ -1,6 +1,5 @@
 <!--
 
-
 package collection;
 ///===================================================================
 /// Collection+Protobuf messages
@@ -55,7 +54,6 @@ message DataField {
   optional string value = 2;
   optional string prompt = 3;
 }
-
 
 
 -->
@@ -208,23 +206,19 @@ The error message is used to express that an error that occurred
 processing the request.
 
 <!-- 
-
 ///-------------------------------------------------------------------
 /// An Error message used to convey the latest error condition
 /// produced by a fault
 ///-------------------------------------------------------------------
 
-
 -->
 
 ```C
-
 message Error {
   optional string title = 1;
   optional string code = 2;
   optional string message = 3;
 }
-
 
 ```
 
@@ -239,7 +233,6 @@ http://amundsen.com/media-types/linkrelations/
 The render field MUST be "link" or "image".
 
 <!--
-
 ///-------------------------------------------------------------------
 /// A Link message for Collection.links & Item.links
 ///
@@ -248,11 +241,9 @@ The render field MUST be "link" or "image".
 /// http://www.iana.org/assignments/link-relations/link-relations.xhtml
 ///-------------------------------------------------------------------
 
-
 -->
 
 ```C
-
 message Link {
   required string rel = 1;
   required string href = 2;
@@ -260,7 +251,6 @@ message Link {
   optional string render = 4 [default="link"];
   optional string prompt = 5;
 }
-
 
 ```
 
@@ -275,7 +265,6 @@ The name/value pairs of the `data` messages can be combined with the
 `href` field to make GET requests.
 
 <!--
-
 ///-------------------------------------------------------------------
 /// A Query message for describing how to make queries
 ///
@@ -284,11 +273,9 @@ The name/value pairs of the `data` messages can be combined with the
 ///-------------------------------------------------------------------
 
 
-
 -->
 
 ```C
-
 message Query {
   required string href = 1;
   required string rel = 2;
@@ -297,7 +284,6 @@ message Query {
   repeated DataField data = 5;
 }
 
-
 ```
 
 ## DataField message
@@ -305,7 +291,6 @@ message Query {
 The DataField message is used by the Query message to describe a query template
 
 <!--
-
 ///-------------------------------------------------------------------
 /// The DataField message is used by the Query message to describe a
 /// query template
@@ -313,17 +298,14 @@ The DataField message is used by the Query message to describe a query template
 
 
 
-
 -->
 
 ```C
-
 message DataField {
   required string name = 1;
   optional string value = 2;
   optional string prompt = 3;
 }
-
 
 ```
 
