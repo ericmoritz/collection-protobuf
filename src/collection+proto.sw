@@ -304,7 +304,7 @@ The `Template.data` and `Item.data` field MUST be ignored by
 
 ## Examples and Utilities
 
-In the `examples/` directory is a `friends.proto` that demostrates
+In the `examples/` directory is a `friends.proto` that demonstrates
 conversion of the `collection+json`
 [example](http://amundsen.com/media-types/collection/examples/) into
 `collection+protobuf`

@@ -1,4 +1,7 @@
 amundsen
+avatar
+blog
+blogs
 com
 DataField
 doc
@@ -15,6 +18,8 @@ hypermedia
 iana
 ietf
 javascript
+jdoe
+joe
 json
 linkrelations
 markdown
@@ -28,6 +33,7 @@ QuestionCollection
 rel
 RESTful
 rfc
+TemplatePB
 vnd
 www
 xhtml

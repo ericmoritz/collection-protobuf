@@ -65,13 +65,16 @@ message DataField {
 > in this document are to be interpreted as described in
 > [RFC2119](http://tools.ietf.org/html/rfc2119).
 
-`collection+protobuf` mimics the
+`collection+protobuf` follows the
 [collection+json](http://amundsen.com/media-types/collection/format/)
-specification using
+specification but uses
 [Protocol Buffers](https://developers.google.com/protocol-buffers/docs/overview)
 to provide a structure for a language-neutral, extensible, hypermedia
 RESTful service that avoids the ambiguity of a schema-less format
 such as JSON.
+
+Unless specified, this specification follows the `collection+json`
+specification and protocol exactly. 
 
 ## Goals of `collection+protobuf`
 
@@ -85,7 +88,8 @@ such as JSON.
 ## Compatibility with `collection+json`
 
 `collection+protobuf` tries to maintain structural compatibility with
-`collection+json` but favors stronger typing for the payload.
+`collection+json` but favors complex strongly typed data for the
+payload.
 
 `collection+protobuf` uses a `pb` field to prevent conflicts with
 services that want to provide a simpler `collection+json` `data`
@@ -95,7 +99,11 @@ Services that want to maintain compatibility with `collection+json`
 are free use repeated `DataField` messages in `Template.data` and
 `Item.data` messages.
 
-This `data` field is assumed ignored by `collection+protobuf` services.
+This `data` field is assumed ignored by services accepting
+`collection+protobuf` request bodies.  Services that use content
+negotiation to allow `collection+json` request bodies, *MUST* follow
+the `collection+json` specification and use the `template.data` and
+`item.data` fields when using JSON.
 
 If your service does convert a `collection+protobuf` message to `JSON`
 don't call the resource `application/vnd.collection+json` unless it
@@ -124,7 +132,7 @@ message type is used to aid extensibility if additional fields need
 to be bundled with the collection. 
 
 ```protobuf
-message Resource {
+message {Subject}Resource {
     optional Collection collection; 
 }
 ```
@@ -135,14 +143,14 @@ A `collection+protobuf` Collection message should be shaped like
 this:
 
 ```protobuf
-message Collection {
-  optional string version;  // SHOULD
-  optional string href;		// SHOULD
-  repeated Link links;		// MAY
-  repeated ____ items;		// MAY
-  repeated Query queries;	// MAY
-  optional ____ template;	// MAY
-  optional Error error;		// MAY
+message {Subject}Collection {
+  optional string version;				// SHOULD
+  optional string href;					// SHOULD
+  repeated Link links;					// MAY
+  repeated {Subject}Item items;			// MAY
+  repeated Query queries;	            // MAY
+  optional {Subject}Template template;	// MAY
+  optional Error error;					// MAY
 }
 ```
 
@@ -158,16 +166,27 @@ or edit members of the collection.
 The template message is shaped like:
 
 ```protobuf
-message Template {
-  optional ____ pb;
+message {Subject}Template {
+  optional{Subject}TemplatePB pb;
 }
 ```
-    
-A `POST` of this object to the collection's `href` will create a new
-resource if `POST` is allowed.
 
-A `PUT` on an `Collection.items[].href` will edit/create a resource
-if `PUT` is allowed on that resource.
+To match `collection+json` The template should be wrapped in
+a the subject's Collection message:
+
+```protobuf
+template {
+  pb {
+    full_name: "J. Doe"
+    email: "joeexample.org"
+    blog: "http://examples.org/blogs/jdoe"
+    avatar: "http://examples.org/images/jdoe"
+  }
+}
+```
+
+A `collection+protobuf` services **MUST** follow protocol established
+by `collection+json` [§ 2.1 read/write](http://amundsen.com/media-types/collection/format/#read-write)
 
 ### The Collection.items field
 
@@ -180,13 +199,11 @@ described below.
 An Item message is shaped like this:
 
 ```protobuf
-
-message Item {
+message {Subject}Item {
   optional string href;
-  optional _ pb;
+  optional {Subject} pb;
   repeated Link links;
 }
-
 ```
 
 ### Item.pb
@@ -312,3 +329,12 @@ explicit typing.
 The `Template.data` and `Item.data` field MUST be ignored by
 `collection+protobuf` services.
 
+## Examples and Utilities
+
+In the `examples/` directory is a `friends.proto` that demonstrates
+conversion of the `collection+json`
+[example](http://amundsen.com/media-types/collection/examples/) into
+`collection+protobuf`
+
+In the `examples/friends/` are text protobuf messages and binary
+protobuf messages for the converted examples.
